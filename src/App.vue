@@ -1,32 +1,45 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+    <router-view></router-view>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+export default {
+    name: 'App',
 
-#nav {
-  padding: 30px;
-}
+    components: {
+    },
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+    mounted : function(){
+        let routeInstance = this.$route;
+        this.createTitleDesc(routeInstance);
+    },
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+    data: () => ({
+        drawer: false,
+    }),
+
+    methods: {
+        createTitleDesc : function(routeInstance){
+            if(routeInstance.meta.title){
+                let setTitle = routeInstance.meta.title;
+                document.title = setTitle;
+            } else {
+                document.title = 'title is not set'
+            }
+            if(routeInstance.meta.desc){
+                let setDesc = routeInstance.meta.desc + ' | MIYACHIN VUE';
+                document.querySelector("meta[name='description']").setAttribute('content', setDesc)
+            } else {
+                document.querySelector("meta[name='description']").setAttribute('content', 'description is not set')
+            }
+        },
+    },
+
+    watch: {
+        '$route' (routeInstance, from) {
+            from;
+            this.createTitleDesc(routeInstance);
+        }
+    },
+};
+</script>
