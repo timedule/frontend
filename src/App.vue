@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-navbar type="dark" style="background-color: #3A3A3A;">
+        <b-navbar type="dark" variant="dark">
             <b-navbar-brand class="px-3">
                 <img src="@/assets/logo.png" alt="Logo" height="30px" class="d-inline-block align-top">
                 Timedule
