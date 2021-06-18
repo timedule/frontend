@@ -1,7 +1,10 @@
 <template>
     <div>
-        <b-navbar type="dark" variant="dark" class="px-3">
-            <b-navbar-brand>Timedule</b-navbar-brand>
+        <b-navbar type="dark" variant="dark">
+            <b-navbar-brand class="px-3">
+                <img src="@/assets/logo.png" alt="Logo" height="30px" class="d-inline-block align-top">
+                Timedule
+            </b-navbar-brand>
         </b-navbar>
         <router-view></router-view>
     </div>
