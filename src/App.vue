@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-navbar type="dark" variant="dark">
-            <b-navbar-brand class="px-3">
+            <b-navbar-brand class="px-3" href="/">
                 <img src="@/assets/logo.png" alt="Logo" height="30px" class="d-inline-block align-top">
                 Timedule
             </b-navbar-brand>
