@@ -1,5 +1,10 @@
 <template>
-    <router-view></router-view>
+    <div>
+        <b-navbar type="dark" variant="dark" class="px-3">
+            <b-navbar-brand>Timedule</b-navbar-brand>
+        </b-navbar>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
