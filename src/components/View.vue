@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div v-if="!response && !error && exists">
+            <vue-loading class="my-3" type="spin" color="#007bff" :size="{width: '50px', height: '50px'}"></vue-loading>
+        </div>
         <div v-if="response">
             {{ this.response }}
         </div>
@@ -12,6 +15,7 @@
 
 <script>
 import axios from "axios";
+import { VueLoading } from 'vue-loading-template'
 import NotFound from '@/components/NotFound.vue'
 
 export default {
@@ -33,6 +37,7 @@ export default {
   },
   components: {
     NotFound,
+    VueLoading,
   },
   data: () => ({
     response: null,
