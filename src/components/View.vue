@@ -9,7 +9,9 @@
                     {{ this.response.title }}
                 </span>
                 <span>
+                    <b-icon-person-circle></b-icon-person-circle>
                     {{ this.response.owner }}
+                    <b-icon-clock></b-icon-clock>
                     {{ this.response.ua_formatted }}
                 </span>
             </div>
