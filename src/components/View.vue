@@ -15,6 +15,13 @@
                     {{ this.response.ua_formatted }}
                 </span>
             </div>
+            <swiper class="swiper" :options="swiperOption" @ready="swiperReady">
+                <div class="swiper-button-prev" slot="button-prev"></div>
+                <div class="swiper-button-next" slot="button-next"></div>
+                <swiper-slide v-for="i in 61" :key="i">
+                    <viewTable :arg="getTable(i - 11)"></viewTable>
+                </swiper-slide>
+            </swiper>
         </div>
         <div v-if="error" class="alert alert-danger" role="alert">
             エラーが発生しました。もう一度お試しください。
@@ -26,7 +33,11 @@
 <script>
 import axios from "axios";
 import { VueLoading } from 'vue-loading-template'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import viewTable from '@/components/View-table.vue'
 import NotFound from '@/components/NotFound.vue'
+
+import 'swiper/css/swiper.css'
 
 export default {
   name: 'View',
@@ -48,13 +59,38 @@ export default {
       });
   },
   components: {
+    viewTable,
     NotFound,
     VueLoading,
+    Swiper,
+    SwiperSlide,
+  },
+  methods: {
+    getTable (a) {
+      let d = new Date(this.today.toString());
+      d.setDate(d.getDate() + a);
+      let dtext = String(d.getFullYear()).slice(-2) + '/' + String(d.getMonth() + 101).slice(-2) + '/' + String(d.getDate() + 100).slice(-2);
+      let data = this.response.main_data[dtext];
+      return {
+        dtext: dtext,
+        data: data,
+      };
+    },
+    swiperReady (swiper) {
+      swiper.slideTo(10, 0);
+    },
   },
   data: () => ({
     response: null,
     exists: true,
     error: false,
+    today: new Date(),
+    swiperOption: {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    },
   }),
 }
 </script>
