@@ -48,6 +48,7 @@ export default {
         this.response = response.data;
         let ua = new Date(this.response.updated_at);
         this.response.ua_formatted = String(ua.getFullYear()).slice(-2) + '/' + String(ua.getMonth() + 101).slice(-2) + '/' + String(ua.getDate() + 100).slice(-2);
+        document.title = this.response.title + ' - Timedule';
       })
       .catch((reason) => {
         if (reason.response.status == 404) {
