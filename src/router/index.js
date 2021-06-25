@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import Top from '@/components/Top.vue'
 import View from '@/components/View.vue'
+import User from '@/components/User.vue'
 import NotFound from '@/components/NotFound.vue'
 
 Vue.use(VueRouter)
@@ -23,6 +24,15 @@ const routes = [
         component: View,
         meta: {
             title: '時間割ビューアー - Timedule',
+            desc: '',
+        },
+    },
+    {
+        path: '/user/:user_id',
+        name: 'User',
+        component: User,
+        meta: {
+            title: 'ユーザー情報 - Timedule',
             desc: '',
         },
     },
