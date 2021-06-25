@@ -9,8 +9,10 @@
                     {{ this.response.title }}
                 </span>
                 <span>
-                    <b-icon-person-circle></b-icon-person-circle>
-                    {{ this.response.owner }}
+                    <router-link :to="'/user/' + this.response.owner" class="link-dark">
+                        <b-icon-person-circle></b-icon-person-circle>
+                        {{ this.response.owner }}
+                    </router-link>
                     <b-icon-clock></b-icon-clock>
                     {{ this.response.ua_formatted }}
                 </span>
