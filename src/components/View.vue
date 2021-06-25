@@ -76,8 +76,10 @@ export default {
     getTable (a) {
       let d = new Date(this.today.toString());
       d.setDate(d.getDate() + a);
-      let dtext = String(d.getFullYear()).slice(-2) + '/' + String(d.getMonth() + 101).slice(-2) + '/' + String(d.getDate() + 100).slice(-2);
-      let data = this.response.main_data[dtext];
+      let datestr = String(d.getFullYear()).slice(-2) + '/' + String(d.getMonth() + 101).slice(-2) + '/' + String(d.getDate() + 100).slice(-2);
+      let data = this.response.main_data[datestr];
+      let dayJP = ['日', '月', '火', '水', '木', '金', '土'];
+      let dtext = datestr + ' (' + dayJP[d.getDay()] + ')';
       return {
         dtext: dtext,
         data: data,

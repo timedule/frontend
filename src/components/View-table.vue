@@ -2,7 +2,7 @@
     <div>
         <div class="text-center my-3 h5 fw-normal">
             <span class="border border-2 border-primary rounded py-1 px-2">
-                &lt; {{ arg.dtext }} &gt;
+                {{ arg.dtext }}
             </span>
         </div>
         <div class="col-6 mx-auto h5" v-if="arg.data">
