@@ -9,7 +9,7 @@
                     {{ this.$route.params.user_id }}さんの時間割
                 </span>
             </div>
-            <div v-for="item in getList()" :key="item.id" class="card m-3 col-md-6 mx-md-auto">
+            <div v-for="item in response" :key="item.id" class="card m-3 col-md-6 mx-md-auto">
                 <div class="card-body">
                     <h5 class="card-title">
                         {{ item.title }}
@@ -48,7 +48,10 @@ export default {
     axios
       .get('https://timedule.herokuapp.com/user/' + this.$route.params.user_id)
       .then((response) => {
-        this.response = response.data;
+        this.response = response.data.sort((a, b) => {
+        return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+      });
+
         document.title = this.$route.params.user_id + 'さんの時間割 - Timedule';
       })
       .catch((reason) => {
@@ -65,11 +68,6 @@ export default {
     VueLoading,
   },
   methods: {
-    getList() {
-      return this.response.sort((a, b) => {
-        return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
-      });
-    },
     formatDate(dstring) {
       let ua = new Date(dstring);
       return String(ua.getFullYear()).slice(-2) + '/' + String(ua.getMonth() + 101).slice(-2) + '/' + String(ua.getDate() + 100).slice(-2);
