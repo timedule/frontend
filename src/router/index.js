@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Top from '@/components/Top.vue'
 import View from '@/components/View.vue'
 import User from '@/components/User.vue'
+import UserSettings from '@/components/User-settings.vue'
 import Login from '@/components/Login.vue'
 import NotFound from '@/components/NotFound.vue'
 
@@ -34,6 +35,15 @@ const routes = [
         component: User,
         meta: {
             title: 'ユーザー情報 - Timedule',
+            desc: '',
+        },
+    },
+    {
+        path: '/user/:user_id/settings',
+        name: 'User-settings',
+        component: UserSettings,
+        meta: {
+            title: 'ユーザー設定 - Timedule',
             desc: '',
         },
     },

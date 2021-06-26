@@ -5,9 +5,16 @@
         </div>
         <div v-if="response">
             <div class="p-3 border-bottom border-2">
-                <span class="h2">
-                    {{ this.$route.params.user_id }}さんの時間割
-                </span>
+                <div class="row">
+                    <div class="h2 col my-auto">
+                        {{ this.$route.params.user_id }}さんの時間割
+                    </div>
+                    <div class="col-auto my-auto h4" v-if="user !== null && user.uid == $route.params.user_id">
+                        <router-link :to="'/user/' + user.uid + '/settings'" class="link-dark">
+                            <b-icon-gear></b-icon-gear>
+                        </router-link>
+                    </div>
+                </div>
             </div>
             <div v-if="response.length == 0" class="text-center m-3">
                 <h5>時間割がありません</h5>
@@ -39,6 +46,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 import axios from "axios";
 import { VueLoading } from 'vue-loading-template'
 import NotFound from '@/components/NotFound.vue'
@@ -46,8 +54,9 @@ import NotFound from '@/components/NotFound.vue'
 import 'swiper/css/swiper.css'
 
 export default {
-  name: 'View',
+  name: 'User',
   mounted () {
+    this.user = firebase.auth().currentUser;
     axios
       .get('https://timedule.herokuapp.com/user/' + this.$route.params.user_id)
       .then((response) => {
@@ -77,6 +86,7 @@ export default {
     },
   },
   data: () => ({
+    user: null,
     response: null,
     exists: true,
     error: false,
