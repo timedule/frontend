@@ -8,11 +8,11 @@
     <div class="text-center">
         <div :key="formKey">
             <img src="@/assets/login.png" height="150" class="my-3">
-            <div class="form-group m-3">
+            <div class="form-group m-3 col-md-4 mx-md-auto">
                 <label for="email">メールアドレス</label>
                 <input type="email" class="form-control" id="email" placeholder="メールアドレス" v-model="username" @keydown.enter="focusPw()">
             </div>
-            <div class="form-group m-3">
+            <div class="form-group m-3 col-md-4 mx-md-auto">
                 <label for="password">パスワード</label>
                 <input type="password" class="form-control" id="password" placeholder="パスワード" v-model="password" @keydown.enter="logIn()">
             </div>
