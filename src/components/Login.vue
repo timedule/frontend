@@ -18,6 +18,11 @@
             </div>
         </div>
         <div class="btn btn-outline-primary" @click="logIn()">ログイン</div>
+        <div class="m-3">
+            <small>
+                まだ登録してませんか？ ➔ <router-link to="/signup">登録</router-link>
+            </small>
+        </div>
         <transition>
             <div v-if="errcode" class="alert alert-danger m-3" role="alert">
                 ログインに失敗しました。エラーコード: {{ this.errcode }}

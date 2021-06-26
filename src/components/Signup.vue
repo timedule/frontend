@@ -22,6 +22,11 @@
             </div>
         </div>
         <div class="btn btn-outline-primary" @click="signUp()">登録</div>
+        <div class="m-3">
+            <small>
+                登録済みの方 ➔ <router-link to="/login">ログイン</router-link>
+            </small>
+        </div>
         <transition>
             <div v-if="errmsg" class="alert alert-danger m-3" role="alert">
                 {{ this.errmsg }}
