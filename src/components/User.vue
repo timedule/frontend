@@ -16,6 +16,15 @@
                     </div>
                 </div>
             </div>
+            <div v-if="user !== null && user.emailVerified == false" class="alert alert-warning m-3" role="alert">
+                ユーザーの登録が完了していません。受信したメールからメールアドレスの確認を行ってください。
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="btn btn-outline-dark col-auto mx-2 mt-2" @click="resendEmail()">
+                        確認メールを再送信
+                    </div>
+                </div>
+            </div>
             <div v-if="response.length == 0" class="text-center m-3">
                 <h5>時間割がありません</h5>
             </div>
@@ -83,6 +92,12 @@ export default {
     formatDate(dstring) {
       let ua = new Date(dstring);
       return String(ua.getFullYear()).slice(-2) + '/' + String(ua.getMonth() + 101).slice(-2) + '/' + String(ua.getDate() + 100).slice(-2);
+    },
+    resendEmail() {
+      this.user.sendEmailVerification()
+        .then(() => {
+          window.alert('確認メールを送信しました');
+        });
     },
   },
   data: () => ({
