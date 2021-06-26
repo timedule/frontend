@@ -9,7 +9,10 @@
                     {{ this.$route.params.user_id }}さんの時間割
                 </span>
             </div>
-            <div v-for="item in response" :key="item.id" class="card m-3 col-md-6 mx-md-auto">
+            <div v-if="response.length == 0" class="text-center m-3">
+                <h5>時間割がありません</h5>
+            </div>
+            <div v-else v-for="item in response" :key="item.id" class="card m-3 col-md-6 mx-md-auto">
                 <div class="card-body">
                     <h5 class="card-title">
                         {{ item.title }}
