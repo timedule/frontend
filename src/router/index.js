@@ -6,6 +6,7 @@ import View from '@/components/View.vue'
 import User from '@/components/User.vue'
 import UserSettings from '@/components/User-settings.vue'
 import Login from '@/components/Login.vue'
+import Signup from '@/components/Signup.vue'
 import NotFound from '@/components/NotFound.vue'
 
 Vue.use(VueRouter)
@@ -53,6 +54,15 @@ const routes = [
         component: Login,
         meta: {
             title: 'ログイン - Timedule',
+            desc: '',
+        },
+    },
+    {
+        path: '/signup',
+        name: 'Signup',
+        component: Signup,
+        meta: {
+            title: 'ユーザー登録 - Timedule',
             desc: '',
         },
     },
