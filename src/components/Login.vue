@@ -47,6 +47,12 @@ export default {
     password: '',
     errcode: '',
   }),
+  mounted() {
+    const user = firebase.auth().currentUser;
+    if (user !== null) {
+      this.$router.push('/user/' + user.uid);
+    }
+  },
   methods: {
     focusPw() {
       document.getElementById('password').focus();
