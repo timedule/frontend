@@ -4,20 +4,22 @@
             <vue-loading class="my-3" type="spin" color="#007bff" :size="{width: '50px', height: '50px'}"></vue-loading>
         </div>
         <div v-if="response">
-            <div class="px-3 py-2 border-bottom border-2 row">
-                <div class="h2 col my-auto">
-                    {{ this.response.title }}
-                </div>
-                <div class="col-auto">
-                    <div>
-                        <router-link :to="'/user/' + this.response.owner" class="link-dark">
-                            <b-icon-person-circle></b-icon-person-circle>
-                            {{ this.response.owner }}
-                        </router-link>
+            <div class="px-3 py-2 border-bottom border-2">
+                <div class="row">
+                    <div class="h2 col my-auto">
+                        {{ this.response.title }}
                     </div>
-                    <div>
-                        <b-icon-clock></b-icon-clock>
-                        {{ this.response.ua_formatted }}
+                    <div class="col-auto">
+                        <div>
+                            <router-link :to="'/user/' + this.response.owner" class="link-dark">
+                                <b-icon-person-circle></b-icon-person-circle>
+                                {{ this.response.owner }}
+                            </router-link>
+                        </div>
+                        <div>
+                            <b-icon-clock></b-icon-clock>
+                            {{ this.response.ua_formatted }}
+                        </div>
                     </div>
                 </div>
             </div>
