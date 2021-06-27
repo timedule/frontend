@@ -65,7 +65,11 @@ import 'swiper/css/swiper.css'
 export default {
   name: 'User',
   mounted () {
-    this.user = firebase.auth().currentUser;
+    firebase.auth().onAuthStateChanged((user)=> {
+      if (user !== null) {
+        this.user = user;
+      }
+    });
     axios
       .get('https://timedule.herokuapp.com/user/' + this.$route.params.user_id)
       .then((response) => {

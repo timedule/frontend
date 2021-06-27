@@ -59,10 +59,11 @@ export default {
     errmsg: '',
   }),
   mounted() {
-    const user = firebase.auth().currentUser;
-    if (user !== null) {
-      this.$router.push('/user/' + user.uid);
-    }
+    firebase.auth().onAuthStateChanged((user)=> {
+      if (user !== null) {
+        this.$router.push('/user/' + this.user.uid);
+      }
+    });
   },
   methods: {
     focusEm() {

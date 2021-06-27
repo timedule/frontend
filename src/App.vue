@@ -31,9 +31,11 @@ export default {
     },
 
     mounted : function(){
+        firebase.auth().onAuthStateChanged((user)=> {
+            this.user = user;
+        });
         let routeInstance = this.$route;
         this.createTitleDesc(routeInstance);
-        this.user = firebase.auth().currentUser;
     },
 
     data: () => ({
@@ -61,7 +63,9 @@ export default {
     watch: {
         '$route' (routeInstance, from) {
             from;
-            this.user = firebase.auth().currentUser;
+            firebase.auth().onAuthStateChanged((user)=> {
+                this.user = user;
+            });
             this.createTitleDesc(routeInstance);
         },
     },
