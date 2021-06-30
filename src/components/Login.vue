@@ -55,7 +55,7 @@ export default {
   mounted() {
     firebase.auth().onAuthStateChanged((user)=> {
       if (user !== null) {
-        this.$router.push('/user/' + this.user.uid);
+        this.$router.replace('/user/' + this.user.uid);
       }
     });
   },
@@ -67,7 +67,7 @@ export default {
       firebase.auth().signInWithEmailAndPassword(this.username, this.password)
         .then((userCredential) => {
           let user = userCredential.user;
-          this.$router.push('/user/' + user.uid);
+          this.$router.replace('/user/' + user.uid);
         })
         .catch((error) => {
           this.errcode = error.code;

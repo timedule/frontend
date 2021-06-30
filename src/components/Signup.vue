@@ -61,7 +61,7 @@ export default {
   mounted() {
     firebase.auth().onAuthStateChanged((user)=> {
       if (user !== null) {
-        this.$router.push('/user/' + this.user.uid);
+        this.$router.replace('/user/' + this.user.uid);
       }
     });
   },
@@ -102,7 +102,7 @@ export default {
                 let user = userCredential.user;
                 user.sendEmailVerification()
                   .then(() => {
-                    this.$router.push('/user/' + user.uid);
+                    this.$router.replace('/user/' + user.uid);
                   });
               })
               .catch((error) => {

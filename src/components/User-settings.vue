@@ -43,7 +43,7 @@ export default {
   mounted () {
     firebase.auth().onAuthStateChanged((user)=> {
       if (user === null || user.uid != this.$route.params.user_id) {
-        this.$router.push('/user/' + this.$route.params.user_id);
+        this.$router.replace('/user/' + this.$route.params.user_id);
       } else {
         this.user = user;
       }
@@ -53,7 +53,7 @@ export default {
     logOut() {
       firebase.auth().signOut()
         .then(() => {
-          this.$router.push('/user/' + this.$route.params.user_id);
+          this.$router.replace('/user/' + this.$route.params.user_id);
         })
         .catch((error) => {
           this.errcode = error.code;
