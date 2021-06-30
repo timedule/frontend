@@ -55,11 +55,14 @@
                                     </div>
                                 </b-tab>
                                 <b-tab title="テンプレート">
-                                    <div class="card m-3 border-2 border-secondary col-md-6 mx-md-auto" v-for="tmpl in template" :key="tmpl.id">
+                                    <div class="card m-3 border-2 border-secondary col-md-6 mx-md-auto" v-for="tmpl in template" :key="tmpl.id" style="position: relative;">
                                         <div class="card-title text-center my-2">
                                             <div class="form-group col-6 mx-auto text-center">
                                                 <input v-model="tmpl.name" class="form-control text-center">
                                             </div>
+                                        </div>
+                                        <div style="position: absolute; top: 0; right: 0; cursor: pointer;" class="mx-3 my-3 h3" @click="delTmpl(tmpl.id)">
+                                            <b-icon-trash></b-icon-trash>
                                         </div>
                                         <div v-for="item in tmpl.items" :key="item.id" class="row mx-3 my-2">
                                             <div class="form-group col-6 px-1">
@@ -218,6 +221,15 @@ export default {
         ],
       }
       this.template.push(obj);
+    },
+    delTmpl (id) {
+      this.template = this.template.filter((tmpl) => {
+        return tmpl.id != id;
+      });
+      for (let i = 1; i <= this.template.length; i++) {
+        this.template[i - 1].id = String(i);
+      }
+      this.template.splice();
     },
     tmplSelected (datestr) {
       let tmplId = this.selectedTmpl[datestr];
