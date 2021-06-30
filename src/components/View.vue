@@ -8,6 +8,9 @@
                 <div class="row">
                     <div class="h2 col my-auto">
                         {{ this.response.title }}
+                        <router-link :to="'/edit/' + $route.params.id" class="text-dark h5 m-1" v-if="user !== null && user.uid == response.owner">
+                            <b-icon-pencil></b-icon-pencil>
+                        </router-link>
                     </div>
                     <div class="col-auto">
                         <div>
@@ -39,6 +42,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 import axios from "axios";
 import { VueLoading } from 'vue-loading-template'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
@@ -50,6 +54,11 @@ import 'swiper/css/swiper.css'
 export default {
   name: 'View',
   mounted () {
+    firebase.auth().onAuthStateChanged((user)=> {
+      if (user !== null) {
+        this.user = user;
+      }
+    });
     axios
       .get('https://timedule.herokuapp.com/table/' + this.$route.params.id)
       .then((response) => {
@@ -92,6 +101,7 @@ export default {
     },
   },
   data: () => ({
+    user: null,
     response: null,
     exists: true,
     error: false,
