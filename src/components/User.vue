@@ -51,6 +51,11 @@
                                 編集
                             </router-link>
                         </div>
+                        <div class="col-auto" v-if="user !== null && user.uid == $route.params.user_id">
+                            <div class="btn btn-outline-danger" @click="delTable(item.id)">
+                                削除
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -148,6 +153,29 @@ export default {
             this.appendTable();
           }
         });
+    },
+    delTable(id) {
+      if (confirm('本当に削除しますか？')) {
+        this.user.getIdToken(true)
+          .then((idToken) => {
+            axios
+              .post('https://timedule.herokuapp.com/deltable/' + id, {
+                user_id: idToken,
+              })
+              .then(() => {
+                this.response = this.response.filter((item) => {
+                  return item.id != id;
+                });
+                this.response.splice();
+              })
+              .catch(() => {
+                alert('エラーが発生しました');
+              });
+          })
+          .catch(() => {
+            alert('エラーが発生しました');
+          });
+      }
     },
   },
   data: () => ({
