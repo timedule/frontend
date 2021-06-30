@@ -70,7 +70,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row m-3 m-md-0">
+                                    <div class="row m-3 mx-md-0">
                                         <div class="border border-success rounded-1 text-success text-center col-md-6 mx-md-auto py-2" @click="appendTmpl()" style="cursor: pointer;">+ 追加</div>
                                     </div>
                                 </b-tab>
