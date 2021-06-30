@@ -43,6 +43,11 @@
                                 開く
                             </router-link>
                         </div>
+                        <div class="col-auto">
+                            <router-link :to="'/edit/' + item.id" class="btn btn-outline-secondary" v-if="user !== null && user.uid == $route.params.user_id">
+                                編集
+                            </router-link>
+                        </div>
                     </div>
                 </div>
             </div>
