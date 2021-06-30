@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import Top from '@/components/Top.vue'
 import View from '@/components/View.vue'
+import Edit from '@/components/Edit.vue'
 import User from '@/components/User.vue'
 import UserSettings from '@/components/User-settings.vue'
 import Login from '@/components/Login.vue'
@@ -27,6 +28,15 @@ const routes = [
         component: View,
         meta: {
             title: '時間割ビューアー - Timedule',
+            desc: '',
+        },
+    },
+    {
+        path: '/edit/:id',
+        name: 'Edit',
+        component: Edit,
+        meta: {
+            title: '時間割を編集 - Timedule',
             desc: '',
         },
     },
