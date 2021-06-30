@@ -25,6 +25,9 @@
                     </div>
                 </div>
             </div>
+            <div class="row m-3 m-md-0">
+                <div class="border border-success rounded-1 text-success text-center col-md-6 mx-md-auto py-2" @click="appendTable()" style="cursor: pointer;" v-if="user !== null && user.uid == $route.params.user_id">+ 追加</div>
+            </div>
             <div v-if="response.length == 0" class="text-center m-3">
                 <h5>時間割がありません</h5>
             </div>
@@ -106,6 +109,44 @@ export default {
       this.user.sendEmailVerification()
         .then(() => {
           window.alert('確認メールを送信しました');
+        });
+    },
+    appendTable() {
+      let sSet="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      let tableId = Array.from(Array(8)).map(()=>sSet[Math.floor(Math.random()*sSet.length)]).join('');
+      axios
+        .get('https://timedule.herokuapp.com/table/' + tableId)
+        .then(() => {
+          this.appendTable();
+        })
+        .catch((reason) => {
+          if (reason.response.status == 404) {
+            this.user.getIdToken(true)
+              .then((idToken) => {
+                axios
+                  .post('https://timedule.herokuapp.com/table/' + tableId, {
+                    owner: idToken,
+                    title: '新しい時間割',
+                    main_data: {},
+                    template: [],
+                  })
+                  .then(() => {
+                    this.response.unshift({
+                      id: tableId,
+                      title: '新しい時間割',
+                      updated_at: new Date().toString(),
+                    });
+                  })
+                  .catch(() => {
+                    alert('エラーが発生しました');
+                  });
+              })
+              .catch(() => {
+                alert('エラーが発生しました');
+              });
+          } else {
+            this.appendTable();
+          }
         });
     },
   },
