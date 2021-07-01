@@ -5,7 +5,7 @@
                 {{ arg.dtext }}
             </span>
         </div>
-        <div class="col-6 mx-auto h5" v-if="arg.data">
+        <div class="col-6 mx-auto h5" v-if="arg.data.length != 0">
             <table class="table table-borderless col-6">
                 <tbody>
                     <tr v-for="data in arg.data" :key="data.id">

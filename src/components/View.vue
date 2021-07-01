@@ -89,6 +89,13 @@ export default {
       d.setDate(d.getDate() + a);
       let datestr = String(d.getFullYear()).slice(-2) + '/' + String(d.getMonth() + 101).slice(-2) + '/' + String(d.getDate() + 100).slice(-2);
       let data = this.response.main_data[datestr];
+      for (let i = 0; i < data.length; i++) {
+        if (data[data.length - 1].item_name == '' && data[data.length - 1].item == '') {
+          data.pop();
+        } else {
+          break;
+        }
+      }
       let dayJP = ['日', '月', '火', '水', '木', '金', '土'];
       let dtext = datestr + ' (' + dayJP[d.getDay()] + ')';
       return {
