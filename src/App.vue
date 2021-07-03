@@ -1,23 +1,28 @@
 <template>
-    <div>
-        <b-navbar type="dark" variant="dark">
-            <div class="row w-100">
-                <b-navbar-brand class="col my-auto mx-3" href="/">
-                    <img src="@/assets/logo.png" alt="Logo" height="30px" class="d-inline-block align-top">
-                    Timedule
-                </b-navbar-brand>
-                <div class="col-auto my-auto px-0">
-                    <router-link to="/login" class="link-light">
-                        <b-icon-person v-if="user === null" class="h1 my-auto"></b-icon-person>
-                        <div v-else class="my-auto">
-                            <b-icon-person-circle></b-icon-person-circle>
-                            {{ user.uid }}
-                        </div>
-                    </router-link>
+    <div class="d-flex flex-column" style="min-height: 100vh;">
+        <div class="flex-row">
+            <b-navbar type="dark" variant="dark">
+                <div class="row w-100">
+                    <b-navbar-brand class="col my-auto mx-3" href="/">
+                        <img src="@/assets/logo.png" alt="Logo" height="30px" class="d-inline-block align-top">
+                        Timedule
+                    </b-navbar-brand>
+                    <div class="col-auto my-auto px-0">
+                        <router-link to="/login" class="link-light">
+                            <b-icon-person v-if="user === null" class="h1 my-auto"></b-icon-person>
+                            <div v-else class="my-auto">
+                                <b-icon-person-circle></b-icon-person-circle>
+                                {{ user.uid }}
+                            </div>
+                        </router-link>
+                    </div>
                 </div>
-            </div>
-        </b-navbar>
-        <router-view></router-view>
+            </b-navbar>
+            <router-view></router-view>
+        </div>
+        <footer class="mt-auto text-center bg-dark text-light py-2">
+            <small>Copyright © 2021 Timedule</small>
+        </footer>
     </div>
 </template>
 
