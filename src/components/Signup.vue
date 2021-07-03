@@ -18,7 +18,11 @@
             </div>
             <div class="form-group m-3 col-md-4 mx-md-auto">
                 <label for="password">パスワード</label>
-                <input type="password" class="form-control" id="password" placeholder="パスワード" v-model="password" @keydown.enter="signUp()">
+                <input :type="pwType" class="form-control" id="password" placeholder="パスワード" v-model="password" @keydown.enter="signUp()">
+            </div>
+            <div class="form-check d-inline-block mb-3">
+                <input class="form-check-input" type="checkbox" id="showPass" v-model="showPass">
+                <label class="form-check-label" for="showPass">パスワードを表示</label>
             </div>
         </div>
         <div class="btn btn-outline-primary" @click="signUp()">登録</div>
@@ -56,6 +60,7 @@ export default {
     uid: '',
     email: '',
     password: '',
+    showPass: false,
     errmsg: '',
   }),
   mounted() {
@@ -120,6 +125,15 @@ export default {
           console.log(reason.message);
           alert(reason.message);
         });
+    },
+  },
+  computed: {
+    pwType: function () {
+      if (this.showPass) {
+        return 'text';
+      } else {
+        return 'password';
+      }
     },
   },
 }
