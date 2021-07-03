@@ -61,7 +61,7 @@ export default {
   mounted() {
     firebase.auth().onAuthStateChanged((user)=> {
       if (user !== null) {
-        this.$router.replace('/user/' + this.user.uid);
+        this.$router.replace('/user/' + user.uid);
       }
     });
   },
