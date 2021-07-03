@@ -27,12 +27,28 @@
                 まだ登録してませんか？ ➔ <router-link to="/signup">登録</router-link>
             </small>
         </div>
+        <div class="m-3">
+            <small>
+                パスワードを忘れた方 ➔ <a class="link" @click="showResetPassModal">再設定メールを送信</a>
+            </small>
+        </div>
         <transition>
             <div v-if="errcode" class="alert alert-danger m-3" role="alert">
                 ログインに失敗しました。エラーコード: {{ this.errcode }}
             </div>
         </transition>
+        <transition>
+            <div v-if="emailSended" class="alert alert-success m-3" role="alert">
+                パスワード再設定メールを送信しました。
+            </div>
+        </transition>
     </div>
+    <b-modal v-model="resetPassModal" title="パスワード再設定メールを送信" hide-header-close @ok="sendResetEmail">
+        <div class="form-group text-center">
+            <label for="email">メールアドレス</label>
+            <input type="email" class="form-control" id="email" placeholder="メールアドレス" v-model="username" @keydown.enter="focusPw()">
+        </div>
+    </b-modal>
 </div>
 </template>
 
@@ -55,6 +71,8 @@ export default {
     username: '',
     password: '',
     showPass: false,
+    resetPassModal: false,
+    emailSended: false,
     errcode: '',
   }),
   mounted() {
@@ -73,6 +91,25 @@ export default {
         .then((userCredential) => {
           let user = userCredential.user;
           this.$router.replace('/user/' + user.uid);
+        })
+        .catch((error) => {
+          this.errcode = error.code;
+          this.formKey += 1;
+          setTimeout(() => {
+            this.errcode = '';
+          }, 2000);
+        });
+    },
+    showResetPassModal() {
+      this.resetPassModal = true;
+    },
+    sendResetEmail() {
+      firebase.auth().sendPasswordResetEmail(this.username)
+        .then(() => {
+          this.emailSended = true;
+          setTimeout(() => {
+            this.emailSended = false;
+          }, 2000);
         })
         .catch((error) => {
           this.errcode = error.code;
