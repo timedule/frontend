@@ -46,7 +46,7 @@
     <b-modal v-model="resetPassModal" title="パスワード再設定メールを送信" hide-header-close @ok="sendResetEmail">
         <div class="form-group text-center">
             <label for="email">メールアドレス</label>
-            <input type="email" class="form-control" id="email" placeholder="メールアドレス" v-model="username" @keydown.enter="focusPw()">
+            <input type="email" class="form-control" id="email" placeholder="メールアドレス" v-model="username" @keydown.enter="sendResetEmail">
         </div>
     </b-modal>
 </div>
