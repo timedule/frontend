@@ -10,11 +10,11 @@
             <img src="@/assets/signup.png" height="150" class="my-3">
             <div class="form-group m-3 col-md-4 mx-md-auto">
                 <label for="uid">ユーザーID</label>
-                <input class="form-control" id="uid" placeholder="ユーザーID" v-model="uid" @keydown.enter="focusEm()">
+                <input class="form-control" id="uid" placeholder="ユーザーID" v-model="uid" @keydown.enter="focusTo('email')">
             </div>
             <div class="form-group m-3 col-md-4 mx-md-auto">
                 <label for="email">メールアドレス</label>
-                <input type="email" class="form-control" id="email" placeholder="メールアドレス" v-model="email" @keydown.enter="focusPw()">
+                <input type="email" class="form-control" id="email" placeholder="メールアドレス" v-model="email" @keydown.enter="focusTo('password')">
             </div>
             <div class="form-group m-3 col-md-4 mx-md-auto">
                 <label for="password">パスワード</label>
@@ -71,11 +71,8 @@ export default {
     });
   },
   methods: {
-    focusEm() {
-      document.getElementById('email').focus();
-    },
-    focusPw() {
-      document.getElementById('password').focus();
+    focusTo(id) {
+      document.getElementById(id).focus();
     },
     signUp() {
       axios.post('https://timedule.herokuapp.com/create_user', {

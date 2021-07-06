@@ -10,7 +10,7 @@
             <img src="@/assets/login.png" height="150" class="my-3">
             <div class="form-group m-3 col-md-4 mx-md-auto">
                 <label for="email">メールアドレス</label>
-                <input type="email" class="form-control" id="email" placeholder="メールアドレス" v-model="username" @keydown.enter="focusPw()">
+                <input type="email" class="form-control" id="email" placeholder="メールアドレス" v-model="username" @keydown.enter="focusTo('password')">
             </div>
             <div class="form-group m-3 col-md-4 mx-md-auto">
                 <label for="password">パスワード</label>
@@ -83,8 +83,8 @@ export default {
     });
   },
   methods: {
-    focusPw() {
-      document.getElementById('password').focus();
+    focusTo(id) {
+      document.getElementById(id).focus();
     },
     logIn() {
       firebase.auth().signInWithEmailAndPassword(this.username, this.password)
