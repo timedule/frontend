@@ -6,10 +6,16 @@ import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './registerServiceWorker'
+import VueAnalytics from 'vue-analytics'
 
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 Vue.config.productionTip = false
+
+Vue.use(VueAnalytics, {
+  id: 'UA-201446671-1',
+  router
+})
 
 var firebaseConfig = {
   apiKey: "AIzaSyDWriPwM7dGyf4FuVWagT9RIVR6UP8rLWk",
