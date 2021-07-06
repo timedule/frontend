@@ -25,6 +25,11 @@
                         ログアウト
                     </div>
                 </div>
+                <div class="d-grid col-12 px-3 col-md-4 mx-auto">
+                    <div class="btn btn-outline-danger mt-3" @click="showAuth4delModal()">
+                        ユーザーを削除
+                    </div>
+                </div>
                 <transition>
                     <div v-if="errcode" class="alert alert-danger m-3" role="alert">
                         エラーが発生しました。エラーコード: {{ this.errcode }}
@@ -53,6 +58,32 @@
                 </div>
             </div>
         </b-modal>
+        <b-modal v-model="auth4delModal" title="ユーザーを削除" hide-header-close @ok="auth4del">
+            <div class="text-center">
+                <div class="form-group m-3">
+                    <label for="password">パスワード</label>
+                    <input :type="pwType" class="form-control" id="password" placeholder="パスワード" v-model="password" @keydown.enter="auth4del()">
+                </div>
+                <div class="form-check d-inline-block mb-3">
+                    <input class="form-check-input" type="checkbox" id="showPass" v-model="showPass">
+                    <label class="form-check-label" for="showPass">パスワードを表示</label>
+                </div>
+            </div>
+        </b-modal>
+        <b-modal v-model="delUserModal" title="ユーザーを削除" hide-header-close @ok="delUser">
+            <div class="text-center">
+                <p>ユーザーのデータは完全に削除されます</p>
+                <p>本当に削除しますか？</p>
+            </div>
+            <template #modal-footer="{ cancel, ok }">
+                <b-button variant="secondary" @click="cancel()">
+                    Cancel
+                </b-button>
+                <b-button variant="danger" @click="ok()">
+                    OK
+                </b-button>
+            </template>
+        </b-modal>
     </div>
 </template>
 
@@ -67,6 +98,7 @@
 
 <script>
 import firebase from 'firebase'
+import axios from "axios";
 import { VueLoading } from 'vue-loading-template'
 
 export default {
@@ -154,13 +186,62 @@ export default {
           }, 2000);
         });
     },
+    showAuth4delModal() {
+      this.auth4delModal = true;
+    },
+    auth4del() {
+      this.auth4delModal = false;
+      firebase.auth().signInWithEmailAndPassword(this.user.email, this.password)
+        .then(() => {
+          this.user.getIdToken(true)
+            .then((idToken) => {
+              this.password = '';
+              this.idToken = idToken;
+              this.delUserModal = true;
+            })
+            .catch(() => {
+              alert('エラーが発生しました');
+            });
+        })
+        .catch((error) => {
+          this.password = '';
+          this.errcode = error.code;
+          this.formKey += 1;
+          setTimeout(() => {
+            this.errcode = '';
+          }, 2000);
+        });
+    },
+    delUser() {
+      this.user.delete()
+        .then(() => {
+          axios
+            .post('https://timedule.herokuapp.com/deluser', {
+              user_id: this.idToken,
+            })
+            .then(() => {
+              this.$router.push('/login');
+            })
+            .cache(() => {
+              this.$router.push('/login');
+            });
+        })
+        .catch((error) => {
+          if (Object.keys(error).length) {
+            alert('エラーが発生しました')
+          }
+        });
+    },
   },
   data: () => ({
     user: null,
+    idToken: '',
     email: '',
     password: '',
     showPass: false,
     changeEmailModal: false,
+    auth4delModal: false,
+    delUserModal: false,
     formKey: 0,
     errcode: '',
     successMsg: '',
