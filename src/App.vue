@@ -21,7 +21,10 @@
             <router-view></router-view>
         </div>
         <footer class="mt-auto text-center bg-dark text-light py-2">
-            <small>Copyright © 2021 Timedule</small>
+            <small>
+                <div><router-link to="/termsofuse" class="link-light">利用規約</router-link> / <router-link to="/privacy" class="link-light">プライバシーポリシー</router-link></div>
+                <div>Copyright © 2021 Timedule</div>
+            </small>
         </footer>
     </div>
 </template>
