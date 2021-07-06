@@ -60,7 +60,7 @@ export default {
       }
     });
     axios
-      .get('https://timedule.herokuapp.com/table/' + this.$route.params.id)
+      .get('https://api.timedule.net/table/' + this.$route.params.id)
       .then((response) => {
         this.response = response.data;
         let ua = new Date(this.response.updated_at);

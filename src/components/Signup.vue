@@ -88,7 +88,7 @@ export default {
     signUp() {
       if (this.acceptService) {
         if (this.password == this.re_password) {
-          axios.post('https://timedule.herokuapp.com/create_user', {
+          axios.post('https://api.timedule.net/create_user', {
             uid: this.uid,
             email: this.email,
             password: this.password,

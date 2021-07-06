@@ -216,7 +216,7 @@ export default {
       this.user.delete()
         .then(() => {
           axios
-            .post('https://timedule.herokuapp.com/deluser', {
+            .post('https://api.timedule.net/deluser', {
               user_id: this.idToken,
             })
             .then(() => {

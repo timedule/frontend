@@ -103,7 +103,7 @@ export default {
       this.user = user;
     });
     axios
-      .get('https://timedule.herokuapp.com/table/' + this.$route.params.id)
+      .get('https://api.timedule.net/table/' + this.$route.params.id)
       .then((response) => {
         this.owner = response.data.owner;
         this.title  = response.data.title;
@@ -249,7 +249,7 @@ export default {
       this.user.getIdToken(true)
         .then((idToken) => {
           axios
-            .post('https://timedule.herokuapp.com/table/' + this.$route.params.id, {
+            .post('https://api.timedule.net/table/' + this.$route.params.id, {
               owner: idToken,
               title: this.title,
               main_data: this.main_data,

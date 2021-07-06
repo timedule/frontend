@@ -84,7 +84,7 @@ export default {
       }
     });
     axios
-      .get('https://timedule.herokuapp.com/user/' + this.$route.params.user_id)
+      .get('https://api.timedule.net/user/' + this.$route.params.user_id)
       .then((response) => {
         this.response = response.data.sort((a, b) => {
         return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
@@ -120,7 +120,7 @@ export default {
       let sSet="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
       let tableId = Array.from(Array(8)).map(()=>sSet[Math.floor(Math.random()*sSet.length)]).join('');
       axios
-        .get('https://timedule.herokuapp.com/table/' + tableId)
+        .get('https://api.timedule.net/table/' + tableId)
         .then(() => {
           this.appendTable();
         })
@@ -129,7 +129,7 @@ export default {
             this.user.getIdToken(true)
               .then((idToken) => {
                 axios
-                  .post('https://timedule.herokuapp.com/table/' + tableId, {
+                  .post('https://api.timedule.net/table/' + tableId, {
                     owner: idToken,
                     title: '新しい時間割',
                     main_data: {},
@@ -159,7 +159,7 @@ export default {
         this.user.getIdToken(true)
           .then((idToken) => {
             axios
-              .post('https://timedule.herokuapp.com/deltable/' + id, {
+              .post('https://api.timedule.net/deltable/' + id, {
                 user_id: idToken,
               })
               .then(() => {
