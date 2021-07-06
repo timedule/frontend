@@ -8,6 +8,8 @@ import User from '@/components/User.vue'
 import UserSettings from '@/components/User-settings.vue'
 import Login from '@/components/Login.vue'
 import Signup from '@/components/Signup.vue'
+import PrivacyPolicy from '@/components/PrivacyPolicy.vue'
+import TermsOfUse from '@/components/TermsOfUse.vue'
 import NotFound from '@/components/NotFound.vue'
 
 Vue.use(VueRouter)
@@ -73,6 +75,24 @@ const routes = [
         component: Signup,
         meta: {
             title: 'ユーザー登録 - Timedule',
+            desc: '',
+        },
+    },
+    {
+        path: '/privacy',
+        name: 'PrivacyPolicy',
+        component: PrivacyPolicy,
+        meta: {
+            title: 'プライバシーポリシー - Timedule',
+            desc: '',
+        },
+    },
+    {
+        path: '/termsofuse',
+        name: 'TermsOfUse',
+        component: TermsOfUse,
+        meta: {
+            title: '利用規約 - Timedule',
             desc: '',
         },
     },
