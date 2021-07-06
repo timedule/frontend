@@ -117,7 +117,7 @@ export default {
                   this.errmsg = error.code;
                   this.formKey += 1;
                   setTimeout(() => {
-                    this.errcode = '';
+                    this.errmsg = '';
                   }, 2000);
                 });
             }
