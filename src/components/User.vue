@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="row m-3 mx-md-0">
-                <div class="border border-success rounded-1 text-success text-center col-md-6 mx-md-auto py-2" @click="appendTable()" style="cursor: pointer;" v-if="user !== null && user.uid == $route.params.user_id && user.emailVerified">+ 追加</div>
+                <div class="btn btn-outline-success col-md-6 mx-md-auto py-2" @click="appendTable()" style="cursor: pointer;" v-if="user !== null && user.uid == $route.params.user_id && user.emailVerified" :key="btnKey">+ 追加</div>
             </div>
             <div v-if="response.length == 0" class="text-center m-3">
                 <h5>時間割がありません</h5>
@@ -141,6 +141,7 @@ export default {
                       title: '新しい時間割',
                       updated_at: new Date().toString(),
                     });
+                    this.btnKey++;
                   })
                   .catch(() => {
                     alert('エラーが発生しました');
@@ -183,6 +184,7 @@ export default {
     response: null,
     exists: true,
     error: false,
+    btnKey: 0,
   }),
 }
 </script>
