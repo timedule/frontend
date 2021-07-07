@@ -238,7 +238,7 @@ export default {
       } else {
         this.template.forEach((tmpl) => {
           if (tmpl.id == tmplId) {
-            this.main_data[datestr] = tmpl.items;
+            this.main_data[datestr] = JSON.parse(JSON.stringify(tmpl.items));
           }
         });
       }
